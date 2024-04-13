@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impresión de ticket</title>
+</head>
+<body>
+  <button onclick="imprimir()">Imprimir Ticket</button>
+
+  <script>
+    async function imprimir() {
+      try {
+        // Solicitar permiso para acceder al puerto serie
+        const port = await navigator.serial.requestPort();
+        await port.open({ baudRate: 9600 });
+
+        // Contenido del ticket
+        const contenidoTicket = "¡Hola! Esto es un ticket de ejemplo.\n";
+
+        // Convertir el contenido a formato adecuado para la impresora
+        const encoder = new TextEncoder();
+        const data = encoder.encode(contenidoTicket);
+
+        // Enviar los datos a la impresora
+        await port.write(data);
+
+        // Cerrar el puerto
+        await port.close();
+
+        alert("Ticket impreso correctamente.");
+      } catch (error) {
+        console.error("Error al imprimir el ticket:", error);
+        alert("Hubo un error al imprimir el ticket. Por favor, revisa la consola para más detalles.");
+      }
+    }
+  </script>
+</body>
+</html>
