@@ -6,29 +6,27 @@
   <title>Impresión de ticket</title>
 </head>
 <body>
-    <button onclick="window.location.href = 'plantilla.html';">Ir a plantilla.html</button>
-
   <button onclick="imprimir()">Imprimir Ticket</button>
+
+  <!-- Contenedor oculto para cargar el contenido de plantilla.html -->
+  <iframe id="iframeTicket" style="display:none;"></iframe>
 
   <script>
     async function imprimir() {
       try {
-        // Solicitar permiso para acceder al puerto serie
-        const port = await navigator.serial.requestPort();
-        await port.open({ baudRate: 9600 });
+        // Obtener el elemento iframe
+        const iframe = document.getElementById('iframeTicket');
 
-        // Contenido del ticket
-        const contenidoTicket = "¡Hola! Esto es un ticket de ejemplo.\n";
+        // Cargar el contenido de la página "plantilla.html" en el iframe
+        iframe.src = 'plantilla.html';
 
-        // Convertir el contenido a formato adecuado para la impresora
-        const encoder = new TextEncoder();
-        const data = encoder.encode(contenidoTicket);
+        // Esperar a que el contenido se cargue completamente en el iframe
+        await new Promise(resolve => {
+          iframe.onload = resolve;
+        });
 
-        // Enviar los datos a la impresora
-        await port.write(data);
-
-        // Cerrar el puerto
-        await port.close();
+        // Imprimir el contenido del iframe
+        iframe.contentWindow.print();
 
         alert("Ticket impreso correctamente.");
       } catch (error) {
