@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantilla de ticket POS</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Estilos personalizados */
+    @media print {
+      /* Ajustar el tamaño del papel */
+      @page {
+        size: 80mm 100mm; /* Ancho x Altura */
+        margin: 0;
+      }
+
+      /* Estilos para el contenido del ticket */
+      .ticket {
+        width: 80mm;
+        height: 100mm;
+        background-color: white;
+        padding: 5mm;
+        border: 1px solid black;
+        text-align: left;
+      }
+
+      .ticket h3 {
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+
+      .ticket hr {
+        margin: 10px 0;
+      }
+
+      .ticket .product {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 3px;
+      }
+
+      .ticket-header {
+        text-align: center;
+      }
+
+      .ticket-header img {
+        width: 200px;
+        height: 150px;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Contenido del ticket -->
+  <div class="ticket">
+    <div class="ticket-header">
+      <img src="https://scontent.fcuc1-1.fna.fbcdn.net/v/t39.30808-1/374462390_122111429378019951_2695154912822763709_n.jpg?stp=dst-jpg_p200x200&_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEcXpfNom0PpNl6yP9sKggyTjRnX3Xw5tdONGdfdfDm18U7VPsEc3kZ7bjol8iMlO8GpYgQCeIgQETQG9Zi9jz6&_nc_ohc=qIc10nTXwdwAb7cuNaE&_nc_ht=scontent.fcuc1-1.fna&oh=00_AfAf6eUU-m1_z3OQVgJSLFzPBQMqYPmMki4WD24ESV7bug&oe=661FA89E" alt="Encabezado del ticket">
+    </div>
+    <hr>
+    <div class="product">
+      <span>Producto 1</span>
+      <span>$10.00</span>
+    </div>
+    <div class="product">
+      <span>Producto 2</span>
+      <span>$20.00</span>
+    </div>
+    <hr>
+    <div class="product">
+      <span>Total:</span>
+      <span>$30.00</span>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (opcional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function imprimir() {
+      window.print();
+    }
+  </script>
+</body>
+</html>
